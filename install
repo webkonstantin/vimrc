@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+DIRECTORY=${1:-"$HOME/.vim"}
+echo Installing into $DIRECTORY ...
+
+if [ -d "$DIRECTORY" ]; then
+	echo "Directory ${DIRECTORY} already exists, moving it to ${DIRECTORY}.bak"
+	mv "${DIRECTORY}" "${DIRECTORY}.bak"
+fi
+
+git clone https://github.com/sw-double/vimrc.git "${DIRECTORY}"
+
+(
+	cd "${DIRECTORY}"
+	git submodule update --init
+	ln -s "${DIRECTORY}/.vimrc" "$HOME/.vimrc"
+)
+
+vim +PluginInstall +qall

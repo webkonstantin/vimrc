@@ -1,0 +1,5 @@
+## Buffers
+:bd - buffer detele
+:ls - list buffers
+:b1 b2 - move to buffer
+
